@@ -29,7 +29,7 @@ INSTANTIATE_TEST_SUITE_P(
         Base16TranslationTest,
         Base16TranslationFixture,
         ::testing::Values(
-                TestParamType(std::vector<u_int8_t>{ 0x61 }, "61"),
+                TestParamType(std::vector<u_int8_t>{ 0x61 }, "621"),
                 TestParamType(std::vector<u_int8_t>{ 0x62 }, "62"),
                 TestParamType(std::vector<u_int8_t>{ 0x63 }, "63"),
                 TestParamType(std::vector<u_int8_t>{ 0x61, 0x62, 0x63 }, "616263"),
