@@ -4,14 +4,17 @@
 #include <cstdint>
 #include <vector>
 #include <stdint.h>
+#include <string>
 
-namespace Euphony {
-    class HexVector {
+namespace Euphony
+{
+    class HexVector
+    {
     public:
         HexVector(int size);
-        HexVector(const HexVector& copy);
-        HexVector(const std::string& hexString);
-        HexVector(const std::vector<u_int8_t>& hexVectorCopy);
+        HexVector(const HexVector &copy);
+        HexVector(const std::string &hexString);
+        HexVector(const std::vector<u_int8_t> &hexVectorCopy);
         ~HexVector();
 
         void pushBack(u_int8_t hexByte);
@@ -22,10 +25,10 @@ namespace Euphony {
         int getSize() const;
         void clear();
 
-        std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
-        begin() const;
-        std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
-        end() const;
+        // std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
+        // begin() const;
+        // std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
+        // end() const;
 
     private:
         std::vector<u_int8_t> hexSource;

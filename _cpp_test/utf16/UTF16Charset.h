@@ -8,12 +8,13 @@
 #include "Charset.h"
 
 namespace Euphony {
-    class UTF16Charset : Charset {
+    class UTF16Charset : public Charset {
     public:
-        ~Charset() = default;
+        UTF16Charset() = default;
+        ~UTF16Charset() = default;
 
-        HexVector encode(std::string src) = 0;
-        std::string decode(const HexVector &src) = 0;
+        HexVector encode(std::string src);
+        std::string decode(const HexVector &src);
     };
 }
 
