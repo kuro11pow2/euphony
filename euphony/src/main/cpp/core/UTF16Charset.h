@@ -12,6 +12,7 @@ namespace Euphony {
         HexVector encode(std::string src);
         std::string decode(const HexVector &src);
     };
+    
 }
 
 #endif //EUPHONY_UTF16CHARSET_H
