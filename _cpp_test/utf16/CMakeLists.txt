@@ -15,4 +15,5 @@ add_executable(
     HexVector.cpp
     Charset.h
     UTF16Charset.cpp
+    print.cpp
 )

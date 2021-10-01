@@ -105,15 +105,15 @@ int HexVector::getSize() const
     return hexSource.size();
 }
 
-// std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
-// HexVector::begin() const{
-//     return hexSource.begin();
-// }
+HexVector::const_iterator
+HexVector::begin() const {
+    return hexSource.begin();
+}
 
-// std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
-// HexVector::end() const{
-//     return hexSource.end();
-// }
+HexVector::const_iterator
+HexVector::end() const {
+    return hexSource.end();
+}
 
 void HexVector::clear()
 {

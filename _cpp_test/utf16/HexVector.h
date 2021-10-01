@@ -25,13 +25,19 @@ namespace Euphony
         int getSize() const;
         void clear();
 
+        typedef std::vector<u_int8_t> HexSource;
+        typedef HexSource::iterator iterator;
+        typedef const HexSource::const_iterator const_iterator;
+        const_iterator begin() const;
+        const_iterator end() const;
+
         // std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
         // begin() const;
         // std::__wrap_iter<std::vector<unsigned char, std::allocator<unsigned char>>::const_pointer>
         // end() const;
 
     private:
-        std::vector<u_int8_t> hexSource;
+        HexSource hexSource;
     };
 }
 

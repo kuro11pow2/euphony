@@ -1,3 +1,4 @@
+
 #include "HexVector.h"
 #include "UTF16Charset.h"
 #include <bits/stdc++.h>
@@ -8,14 +9,23 @@ using namespace Euphony;
 bool encode_test(string input, string expected_output, bool print = false);
 bool decode_test(string input, string expected_output, bool print = false);
 void print_bin_hex(string utf8string);
+void hexvector_test();
 
 int main()
 {
     vector<pair<string, string>> testcases{
-        {"a", "61"},
-        {"b", "62"},
+        {"a", "0061"},
+        {"b", "0062"},
         {"가", "ac00"},
-        {"각", "ac01"}};
+        {"각", "ac01"},
+        {"j", "006a"},
+        {"나", "b098"},
+        {"홍길동", "d64dae38b3d9"},
+        {"@XYZ", "004000580059005a"},
+        {".com", "002e0063006f006d"},
+        {"서울특별시", "c11cc6b8d2b9bcc4c2dc"},
+        {"010-1234-5678", "003000310030002d0031003200330034002d0035003600370038"},
+        {"36.5℃", "00330036002e00352103"}};
 
     int n_testcase(0), n_succeed(0);
     for (int i = 0; i < testcases.size(); i++)
@@ -29,6 +39,16 @@ int main()
             n_succeed++;
     }
     cout << "전체 테스트 케이스: " << testcases.size() * 2 << "\n실패한 테스트 케이스: " << testcases.size() * 2 - n_succeed << "\n";
+    return 0;
+}
+
+void hexvector_test() {
+    Charset *charset = new UTF16Charset();
+    HexVector hv {"abc"};
+    cout << hv.toString();
+    for (auto x : hv) {
+        cout << std::hex << (int)x;
+    }
 }
 
 bool encode_test(string input, string expected_output, bool print)
@@ -58,7 +78,7 @@ bool decode_test(string input, string expected_output, bool print)
 {
     bool ret = false;
     Charset *charset = new UTF16Charset();
-    HexVector hv = charset->encode(input);
+    HexVector hv{input};
     string actual_output = charset->decode(hv);
 
     if (print)
@@ -74,30 +94,4 @@ bool decode_test(string input, string expected_output, bool print)
         ret = false;
     }
     return ret;
-}
-
-void print_bin_hex(string utf8string)
-{
-    ios_base::fmtflags f(cout.flags());
-    cout << "original utf8string string \"" << utf8string << "\" " << utf8string.size() << " code units:\n";
-    for (char c : utf8string)
-        cout << bitset<8>(c) << '\n';
-    cout << "\n";
-
-    // the UTF-8 / UTF-16 standard conversion facet
-    wstring_convert<codecvt_utf8_utf16<char16_t>, char16_t> cv8to16;
-    u16string utf16 = cv8to16.from_bytes(utf8string.data());
-    cout << "UTF16 conversion produced " << utf16.size() << " code units:\n";
-    for (char16_t c : utf16)
-        cout << bitset<16>(c) << "\t" << hex << showbase << c << '\n';
-    cout << "\n";
-
-    // the UTF-8 / UTF-32 standard conversion facet
-    wstring_convert<codecvt_utf8<char32_t>, char32_t> cv8to32;
-    u32string utf32 = cv8to32.from_bytes(utf8string);
-    cout << "UTF32 conversion produced " << dec << utf32.size() << " code units:\n";
-    for (char32_t c : utf32)
-        cout << bitset<32>(c) << "\t" << hex << showbase << c << '\n';
-    cout.flags(f);
-    cout << "\n\n";
 }
