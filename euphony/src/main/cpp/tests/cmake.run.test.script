@@ -8,6 +8,14 @@ string(STRIP ${GTEST_EUPHONY_OUTPUT} GTEST_EUPHONY_OUTPUT)
 string(REPLACE "\n\n" "\r[NEXT]\r" GTEST_EUPHONY_OUTPUT ${GTEST_EUPHONY_OUTPUT})
 string(REPLACE "\n" "\r" GTEST_EUPHONY_OUTPUT ${GTEST_EUPHONY_OUTPUT})
 
+execute_process(COMMAND ${ADB} -s ${SERIAL} shell getprop ro.build.version.sdk
+        OUTPUT_VARIABLE ADB_DEVICE_SDK
+        RESULT_VARIABLE ADB_DEVICE_SDK_RESULT)
+string(STRIP ${ADB_DEVICE_SDK} ADB_DEVICE_SDK)
+if (${ADB_DEVICE_SDK} STREQUAL "28")
+    message(WARNING "The API level of your Android device is 28. The build may fail at API level 28, so please use a different version.")
+endif()
+
 if( ${GTEST_RESULT} GREATER 0 )
     message(FATAL_ERROR "** Gtest Failure (${GTEST_RESULT}) **\r${GTEST_EUPHONY_OUTPUT}")
 else()
